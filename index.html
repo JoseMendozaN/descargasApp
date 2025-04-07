@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>App Universitaria</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(145deg, #1c1c1c, #333333);
+      color: #f0f0f0;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    h1 {
+      font-size: 3em;
+      background: linear-gradient(90deg, #8b6e5f, #a4a2a3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .platforms {
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      padding: 40px;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 20px;
+      width: 200px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s, background 0.3s;
+      cursor: pointer;
+    }
+
+    .card i {
+      font-size: 60px;
+      margin-bottom: 20px;
+      color: #8b6e5f;
+      transition: color 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .card:hover i {
+      color: #a4a2a3;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+      color: #aaa;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="cursorCanvas"></canvas>
+
+  <header>
+    <h1>Descubre Nuestra App Oficial</h1>
+    <p>Disponible para Android, iOS y Web</p>
+  </header>
+
+  <section class="platforms">
+    <div class="card" id="androidDownload" data-tilt>
+      <i class='bx bxl-android'></i>
+      <h3>Android</h3>
+    </div>
+    <div class="card" id="iosDownload" data-tilt>
+      <i class='bx bxl-apple'></i>
+      <h3>iOS</h3>
+    </div>
+    <div class="card" id="webLink" data-tilt>
+      <i class='bx bxl-chrome'></i>
+      <h3>Web</h3>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Universidad Tecnológica Regional del Sur. Todos los derechos reservados.
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+  <script>
+    // Interacción con el cursor usando canvas
+    const canvas = document.getElementById('cursorCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let mouse = { x: 0, y: 0 };
+
+    window.addEventListener('mousemove', e => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.beginPath();
+      ctx.arc(mouse.x, mouse.y, 20, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(139, 110, 95, 0.4)';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(mouse.x, mouse.y, 5, 0, Math.PI * 2);
+      ctx.fillStyle = '#a4a2a3';
+      ctx.fill();
+      requestAnimationFrame(draw);
+    }
+
+    draw();
+
+    // Funciones de descarga para Android e iOS
+    document.getElementById('androidDownload').addEventListener('click', () => {
+      const androidFile = 'path_to_android_app.apk';  // Ruta al archivo .apk
+      const link = document.createElement('a');
+      link.href = androidFile;
+      link.download = 'App_Android.apk';
+      link.click();
+    });
+
+    document.getElementById('iosDownload').addEventListener('click', () => {
+      const iosFile = 'path_to_ios_app.ipa';  // Ruta al archivo .ipa
+      const link = document.createElement('a');
+      link.href = iosFile;
+      link.download = 'App_iOS.ipa';
+      link.click();
+    });
+
+    // Enlace Web
+    document.getElementById('webLink').addEventListener('click', () => {
+      window.location.href = 'https://example.com/app-web-download';  // URL del enlace de la web
+    });
+  </script>
+</body>
+</html>
+   
