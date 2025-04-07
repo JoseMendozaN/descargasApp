@@ -118,7 +118,7 @@
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
   <script>
-    // Interacción con el cursor usando canvas
+    // Canvas del cursor
     const canvas = document.getElementById('cursorCanvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -146,28 +146,18 @@
 
     draw();
 
-    // Funciones de descarga para Android e iOS
+    // Redirección de enlaces
     document.getElementById('androidDownload').addEventListener('click', () => {
-      const androidFile = 'path_to_android_app.apk';  // Ruta al archivo .apk
-      const link = document.createElement('a');
-      link.href = androidFile;
-      link.download = 'App_Android.apk';
-      link.click();
+      window.location.href = 'https://www.mediafire.com/file/y4qslvczqh5d5hr/application-850bfeb1-bedb-472d-9732-6a0dbfee6d11.apk/file';
     });
 
     document.getElementById('iosDownload').addEventListener('click', () => {
-      const iosFile = 'path_to_ios_app.ipa';  // Ruta al archivo .ipa
-      const link = document.createElement('a');
-      link.href = iosFile;
-      link.download = 'App_iOS.ipa';
-      link.click();
+      window.location.href = 'https://example.com/ios';
     });
 
-    // Enlace Web
     document.getElementById('webLink').addEventListener('click', () => {
-      window.location.href = 'https://example.com/app-web-download';  // URL del enlace de la web
+      window.location.href = 'https://example.com/web';
     });
   </script>
 </body>
 </html>
-   
