@@ -1,162 +1,164 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>App Universitaria</title>
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UTR SUR | App Multiplataforma</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
-    }
-
     body {
-      background: linear-gradient(145deg, #1c1c1c, #333333);
-      color: #f0f0f0;
-      overflow-x: hidden;
+      font-family: 'Inter', sans-serif;
+      background-color: #000;
+      color: #fff;
+      scroll-behavior: smooth;
     }
-
-    header {
-      text-align: center;
-      padding: 50px 20px;
+    .device-img {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      mix-blend-mode: screen;
+      filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.3));
     }
-
-    h1 {
-      font-size: 3em;
-      background: linear-gradient(90deg, #8b6e5f, #a4a2a3);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: pulse 2s infinite;
+    .device-img.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
+    .floating {
+      animation: floating 3s ease-in-out infinite;
     }
-
-    .platforms {
-      display: flex;
-      justify-content: center;
-      gap: 50px;
-      padding: 40px;
-      flex-wrap: wrap;
+    @keyframes floating {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
     }
-
-    .card {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 30px;
-      border-radius: 20px;
-      width: 200px;
-      text-align: center;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s, background 0.3s;
-      cursor: pointer;
-    }
-
-    .card i {
-      font-size: 60px;
-      margin-bottom: 20px;
-      color: #8b6e5f;
-      transition: color 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-10px);
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .card:hover i {
-      color: #a4a2a3;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9em;
-      color: #aaa;
-    }
-
-    canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: -1;
+    .bg-grid {
+      background-image: 
+        radial-gradient(circle at 25% 25%, rgba(0, 255, 255, 0.05) 0%, transparent 50%),
+        linear-gradient(to bottom, #0A0A0A, #000);
     }
   </style>
 </head>
-<body>
-  <canvas id="cursorCanvas"></canvas>
-
-  <header>
-    <h1>Descubre Nuestra App Oficial</h1>
-    <p>Disponible para Android, iOS y Web</p>
-  </header>
-
-  <section class="platforms">
-    <div class="card" id="androidDownload" data-tilt>
-      <i class='bx bxl-android'></i>
-      <h3>Android</h3>
+<body class="bg-grid">
+  <!-- Navbar -->
+  <nav class="py-6 px-8 flex justify-between items-center sticky top-0 z-50 bg-black bg-opacity-80 backdrop-blur-sm">
+    <div class="text-2xl font-semibold">UTR<span class="text-cyan-400">SUR</span></div>
+    <div class="hidden md:flex space-x-8">
+      <a href="#android" class="hover:text-cyan-400">Android</a>
+      <a href="#ios" class="hover:text-cyan-400">iOS</a>
+      <a href="#web" class="hover:text-cyan-400">Web</a>
+      <a href="#all" class="hover:text-cyan-400">Todos</a>
     </div>
-    <div class="card" id="iosDownload" data-tilt>
-      <i class='bx bxl-apple'></i>
-      <h3>iOS</h3>
-    </div>
-    <div class="card" id="webLink" data-tilt>
-      <i class='bx bxl-chrome'></i>
-      <h3>Web</h3>
+    <button class="md:hidden">☰</button>
+  </nav>
+
+  <!-- Sección Android -->
+  <section id="android" class="min-h-screen flex items-center justify-center px-8 py-20 border-b border-gray-800">
+    <div class="container mx-auto flex flex-col md:flex-row items-center">
+      <div class="md:w-1/2 mb-12 md:mb-0">
+        <h2 class="text-4xl font-bold mb-6">Experiencia <span class="text-cyan-400">Android</span></h2>
+        <p class="text-xl mb-8 text-gray-300">Optimizada para dispositivos Android con integración nativa.</p>
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-center"><span class="text-cyan-400 mr-2">✓</span> Compatible con Android 10+</li>
+          <li class="flex items-center"><span class="text-cyan-400 mr-2">✓</span> Notificaciones push</li>
+          <li class="flex items-center"><span class="text-cyan-400 mr-2">✓</span> Modo oscuro automático</li>
+        </ul>
+        <a href="https://www.mediafire.com/file/k43bvt9z6pyiqyp/utrsur-android.apk/file" class="bg-cyan-500 hover:bg-cyan-600 text-black px-6 py-2 rounded-full font-medium transition inline-block">
+          Descargar APK
+        </a>
+      </div>
+      <div class="md:w-1/2 flex justify-center relative">
+        <div class="absolute -inset-8 bg-cyan-500 rounded-full opacity-10 blur-xl"></div>
+        <img src="img/25e525c0-e7cd-4d45-9a29-99ccad5a77c9.png" 
+             alt="Android App" 
+             class="device-img rounded-2xl w-64 md:w-80 floating">
+      </div>
     </div>
   </section>
 
-  <footer>
-    © 2025 Universidad Tecnológica Regional del Sur. Todos los derechos reservados.
+  <!-- Sección iOS -->
+  <section id="ios" class="min-h-screen flex items-center justify-center px-8 py-20 border-b border-gray-800">
+    <div class="container mx-auto flex flex-col md:flex-row-reverse items-center">
+      <div class="md:w-1/2 mb-12 md:mb-0 md:pl-12">
+        <h2 class="text-4xl font-bold mb-6">Versión <span class="text-cyan-400">iPhone</span></h2>
+        <p class="text-xl mb-8 text-gray-300">Diseño fluido para dispositivos Apple.</p>
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-center"><span class="text-cyan-400 mr-2">✓</span> Optimizado para iOS 15+</li>
+          <li class="flex items-center"><span class="text-cyan-400 mr-2">✓</span> Soporte para Dynamic Island</li>
+          <li class="flex items-center"><span class="text-cyan-400 mr-2">✓</span> Integración con Face ID</li>
+        </ul>
+        <a href="paginas/ios.html" class="bg-cyan-500 hover:bg-cyan-600 text-black px-6 py-2 rounded-full font-medium transition inline-block">
+          Descargar IPA
+        </a>
+      </div>
+      <div class="md:w-1/2 flex justify-center relative">
+        <div class="absolute -inset-8 bg-cyan-500 rounded-full opacity-10 blur-xl"></div>
+        <img src="img/8ddfc21e-911f-4a9f-82bf-6a6571dd27eb.png" 
+             alt="iOS App" 
+             class="device-img rounded-2xl w-64 md:w-80 floating">
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Web -->
+  <section id="web" class="min-h-screen flex items-center justify-center px-8 py-20 border-b border-gray-800">
+    <div class="container mx-auto flex flex-col md:flex-row items-center">
+      <div class="md:w-1/2 mb-12 md:mb-0">
+        <h2 class="text-4xl font-bold mb-6">Versión <span class="text-cyan-400">Web</span></h2>
+        <p class="text-xl mb-8 text-gray-300">Accede desde cualquier navegador.</p>
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-center"><span class="text-cyan-400 mr-2">✓</span> Compatible con Chrome, Safari y Edge</li>
+          <li class="flex items-center"><span class="text-cyan-400 mr-2">✓</span> PWA instalable</li>
+          <li class="flex items-center"><span class="text-cyan-400 mr-2">✓</span> Sincronización multiplataforma</li>
+        </ul>
+        <a href="https://devdanielc.github.io/login" class="bg-cyan-500 hover:bg-cyan-600 text-black px-6 py-2 rounded-full font-medium transition inline-block">
+          Ir al sitio
+        </a>
+      </div>
+      <div class="md:w-1/2 flex justify-center relative">
+        <div class="absolute -inset-8 bg-cyan-500 rounded-full opacity-10 blur-xl"></div>
+        <img src="img/f67642a8-549d-496f-84f1-116a448180e5.png"
+             alt="Web App" 
+             class="device-img rounded-2xl w-full max-w-md floating">
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Todos -->
+  <section id="all" class="min-h-screen flex items-center justify-center px-8 py-20">
+    <div class="container mx-auto text-center">
+      <h2 class="text-4xl font-bold mb-6">Disponible en <span class="text-cyan-400">todas partes</span></h2>
+      <p class="text-xl mb-16 text-gray-300 max-w-3xl mx-auto">Usa UTR SUR en cualquier dispositivo.</p>
+      
+      <div class="relative flex justify-center items-center">
+        <img src="img/e1d3f795-d737-42ab-8e33-125686b8d01e.png" 
+             alt="Todos los dispositivos" 
+             class="device-img rounded-2xl shadow-xl w-full max-w-4xl floating">
+        
+        <div class="absolute -bottom-8 -right-8 bg-cyan-500 w-24 h-24 rounded-full opacity-20 blur-xl"></div>
+      </div>
+      
+     
+    </div>
+  </section>
+
+  <footer class="py-12 px-8 border-t border-gray-800">
+    <div class="container mx-auto text-center text-gray-500">
+      <p>© 2024 UTR SUR. Todos los derechos reservados.</p>
+    </div>
   </footer>
 
-  <!-- Scripts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
   <script>
-    // Canvas del cursor
-    const canvas = document.getElementById('cursorCanvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    // Animaciones al hacer scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
 
-    let mouse = { x: 0, y: 0 };
-
-    window.addEventListener('mousemove', e => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-    });
-
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.beginPath();
-      ctx.arc(mouse.x, mouse.y, 20, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(139, 110, 95, 0.4)';
-      ctx.fill();
-      ctx.beginPath();
-      ctx.arc(mouse.x, mouse.y, 5, 0, Math.PI * 2);
-      ctx.fillStyle = '#a4a2a3';
-      ctx.fill();
-      requestAnimationFrame(draw);
-    }
-
-    draw();
-
-    // Redirección de enlaces
-    document.getElementById('androidDownload').addEventListener('click', () => {
-      window.location.href = 'https://www.mediafire.com/file/y4qslvczqh5d5hr/application-850bfeb1-bedb-472d-9732-6a0dbfee6d11.apk/file';
-    });
-
-    document.getElementById('iosDownload').addEventListener('click', () => {
-      window.location.href = 'https://example.com/ios';
-    });
-
-    document.getElementById('webLink').addEventListener('click', () => {
-      window.location.href = 'https://example.com/web';
+    document.querySelectorAll('.device-img').forEach(img => {
+      observer.observe(img);
     });
   </script>
 </body>
