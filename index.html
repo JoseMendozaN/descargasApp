@@ -12,6 +12,7 @@
       background-color: #000;
       color: #fff;
       scroll-behavior: smooth;
+      overflow-x: hidden;
     }
     .device-img {
       opacity: 0;
@@ -36,6 +37,41 @@
         radial-gradient(circle at 25% 25%, rgba(0, 255, 255, 0.05) 0%, transparent 50%),
         linear-gradient(to bottom, #0A0A0A, #000);
     }
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 75%;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.95);
+      z-index: 100;
+      transition: right 0.3s ease-in-out;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      padding: 2rem;
+    }
+    .mobile-menu.open {
+      right: 0;
+    }
+    .menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 99;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease-in-out;
+    }
+    .menu-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
   </style>
 </head>
 <body class="bg-grid">
@@ -48,9 +84,21 @@
       <a href="#web" class="hover:text-cyan-400">Web</a>
       <a href="#all" class="hover:text-cyan-400">Todos</a>
     </div>
-    <button class="md:hidden">☰</button>
+    <button id="menu-toggle" class="md:hidden text-2xl">☰</button>
   </nav>
 
+  <!-- Overlay para cerrar el menú -->
+  <div id="menu-overlay" class="menu-overlay"></div>
+
+  <!-- Menú móvil -->
+  <div id="mobile-menu" class="mobile-menu">
+    <a href="#android" class="text-2xl hover:text-cyan-400 transition">Android</a>
+    <a href="#ios" class="text-2xl hover:text-cyan-400 transition">iOS</a>
+    <a href="#web" class="text-2xl hover:text-cyan-400 transition">Web</a>
+    <a href="#all" class="text-2xl hover:text-cyan-400 transition">Todos</a>
+  </div>
+
+  <!-- Resto del contenido... -->
   <!-- Sección Android -->
   <section id="android" class="min-h-screen flex items-center justify-center px-8 py-20 border-b border-gray-800">
     <div class="container mx-auto flex flex-col md:flex-row items-center">
@@ -138,8 +186,6 @@
         
         <div class="absolute -bottom-8 -right-8 bg-cyan-500 w-24 h-24 rounded-full opacity-20 blur-xl"></div>
       </div>
-      
-     
     </div>
   </section>
 
@@ -147,7 +193,6 @@
     <div class="container mx-auto text-center text-gray-500">
       <p>© 2024 UTR SUR. Todos los derechos reservados.</p>
       <p class="mt-2">Desarrollado con por: José Mendoza</p>
-
     </div>
   </footer>
 
@@ -163,6 +208,26 @@
 
     document.querySelectorAll('.device-img').forEach(img => {
       observer.observe(img);
+    });
+
+    // Menú móvil - Versión corregida
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuOverlay = document.getElementById('menu-overlay');
+    
+    function toggleMenu() {
+      mobileMenu.classList.toggle('open');
+      menuOverlay.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : 'auto';
+    }
+    
+    // Event listeners
+    menuToggle.addEventListener('click', toggleMenu);
+    menuOverlay.addEventListener('click', toggleMenu);
+    
+    // Cerrar menú al hacer clic en un enlace
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', toggleMenu);
     });
   </script>
 </body>
